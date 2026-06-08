@@ -9,42 +9,39 @@ document.querySelector(".close");
 
 btn.onclick = () => {
 
-popup.style.display="flex";
+    popup.style.display = "flex";
 
-    for(let i=0;i<40;i++)
+    let count = 0;
+
+    const shower = setInterval(() => {
+
         createHeart();
+
+        count++;
+
+        if(count >= 12){
+            clearInterval(shower);
+        }
+
+    }, 250);
 
 };
 
 close.onclick = () => {
 
-popup.style.display = "none";
+    popup.style.display = "none";
 
 };
 
 window.onclick = (e) => {
 
-if(e.target === popup){
+    if(e.target === popup){
 
-popup.style.display = "none";
-
-}
-
-};
-
-yesBtn.addEventListener("click",()=>{
-
-    popup.style.display = "flex";
-
-    for(let i=0;i<25;i++){
-
-        setTimeout(()=>{
-            createHeart();
-        },i*100);
+        popup.style.display = "none";
 
     }
 
-});
+};
 
 function createHeart(){
 
@@ -53,16 +50,27 @@ function createHeart(){
 
     heart.className = "heart";
 
-   const hearts = ["💖","💕","💗","💞","💘"];
+    const hearts = [
+        "💖",
+        "💕",
+        "💗",
+        "💞",
+        "💘"
+    ];
 
-heart.textContent =
-hearts[Math.floor(Math.random()*hearts.length)];
+    heart.textContent =
+    hearts[Math.floor(Math.random()*hearts.length)];
+
     heart.style.left =
     Math.random()*90 + "vw";
 
+    heart.style.fontSize =
+    (25 + Math.random()*20) + "px";
+
     document.body.appendChild(heart);
 
-    setTimeout(()=>{
+    setTimeout(() => {
         heart.remove();
-    },4000);
+    }, 4000);
+
 }
